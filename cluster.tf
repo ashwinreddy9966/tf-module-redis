@@ -1,24 +1,14 @@
-resource "aws_docdb_cluster" "docdb" {
-  cluster_identifier      = "roboshop-${var.ENV}"
-  engine                  = "docdb"
-  master_username         = "admin1"
-  master_password         = "roboshop1"
-  skip_final_snapshot     = true
-  db_subnet_group_name    = aws_docdb_subnet_group.docdb.name
+resource "aws_elasticache_cluster" "redis" {
+  cluster_id           = "roboshop-${ENV}"
+  engine               = "redis"
+  node_type            = "cache.t3.large"
+  num_cache_nodes      = 1
+  parameter_group_name = aws_elasticache_parameter_group.default.name
+  engine_version       = "6.2"
+  port                 = 6379
 }
 
-resource "aws_docdb_subnet_group" "docdb" {
-  name       = "roboshop-${var.ENV}"
-  subnet_ids = data.terraform_remote_state.vpc.outputs.PRIVATE_SUBNET_IDS
-
-    tags = {
-        Name = "roboshop-subnet-group-${var.ENV}"
-      }
- }
-
-resource "aws_docdb_cluster_instance" "cluster_instances" {
-  count              = 1
-  identifier         = "roboshop-${var.ENV}"
-  cluster_identifier = aws_docdb_cluster.docdb.id
-  instance_class     = "db.t3.medium"
+resource "aws_elasticache_parameter_group" "default" {
+  name   = "roboshop-redis-${ENV}"
+  family = "redis6.2"
 }
