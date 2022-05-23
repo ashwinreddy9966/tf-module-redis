@@ -29,7 +29,7 @@ resource "aws_security_group" "redis" {
     description = "Allows Redis Port"
     from_port   = 6379
     to_port     = 6379
-    protocol    = "-1"
+    protocol    = "tcp"
     cidr_blocks = [data.terraform_remote_state.vpc.outputs.VPC_CIDR]
   }
 
