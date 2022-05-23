@@ -23,7 +23,7 @@ resource "aws_elasticache_subnet_group" "subnet-group" {
 resource "aws_security_group" "redis" {
   name        = "roboshop-redis-${var.ENV}"
   description = "roboshop-redis-${var.ENV}"
-  vpc_id      = data.terraform_remote_state.vpc.outputs.VPC_ID
+  vpc_id      =  data.terraform_remote_state.vpc.outputs.VPC_ID
 
   ingress {
     description = "Allows Redis Port"
