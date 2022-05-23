@@ -1,5 +1,5 @@
 resource "aws_elasticache_cluster" "redis" {
-  cluster_id           = "roboshop-${ENV}"
+  cluster_id           = "roboshop-$var.{ENV}"
   engine               = "redis"
   node_type            = "cache.t3.large"
   num_cache_nodes      = 1
