@@ -11,12 +11,12 @@ resource "aws_elasticache_cluster" "redis" {
 }
 
 resource "aws_elasticache_parameter_group" "default" {
-  name   = "roboshop-redis-${ENV}"
+  name   = "roboshop-redis-${var.ENV}"
   family = "redis6.x"
 }
 
 resource "aws_elasticache_subnet_group" "subnet-group" {
-  name       = "roboshop-${ENV}"
+  name       = "roboshop-${var.ENV}"
   subnet_ids = data.terraform_remote_state.vpc.outputs.PRIVATE_SUBNET_IDS
 }
 
