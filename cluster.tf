@@ -1,7 +1,7 @@
 resource "aws_elasticache_cluster" "redis" {
   cluster_id           = "roboshop-${var.ENV}"
   engine               = "redis"
-  node_type            = "cache.t3.small"
+  node_type            =  var.REDIS_INSTANCE_CLASS
   num_cache_nodes      = 1
   parameter_group_name = aws_elasticache_parameter_group.default.name
   engine_version       = "6.x"
@@ -27,10 +27,10 @@ resource "aws_security_group" "redis" {
 
   ingress {
     description = "Allows Redis Port"
-    from_port   = 6379
-    to_port     = 6379
+    from_port   = var.REDIS_PORT
+    to_port     = var.REDIS_PORT
     protocol    = "tcp"
-    cidr_blocks = [data.terraform_remote_state.vpc.outputs.VPC_CIDR]
+    cidr_blocks = [data.terraform_remote_state.vpc.outputs.VPC_CIDR, var.WORKSTATION_IP]
   }
 #  ingress {
 #    description = "Allows Def Subnet CIDR"
