@@ -6,4 +6,6 @@
 #  records = [aws_docdb_cluster.redis.????]
 #}
 
-
+output "redis" {
+  value = aws_elasticache_cluster.redis
+}
