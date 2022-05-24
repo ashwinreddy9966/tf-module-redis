@@ -3,4 +3,6 @@ variable "WORKSTATION_IP" {}
 
 #Redis
 variable "ELASTICACHE_PORT" {}
-variable "REDIS_INSTANCE_CLASS" {}
+variable "ELASTICACHE_ENGINE_VERSION" {}
+variable "ELASTICACHE_ENGINE_VERSION" {}
+variable "ELASTICACHE_ENGINE_VERSION" {}
