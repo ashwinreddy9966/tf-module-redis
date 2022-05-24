@@ -4,8 +4,8 @@ resource "aws_elasticache_cluster" "redis" {
   node_type            =  var.ELASTICACHE_NODE_TYPE
   num_cache_nodes      = var.ELASTICACHE_NODE_COUNT
   parameter_group_name = aws_elasticache_parameter_group.default.name
-  engine_version       = "6.x"
-  port                 = 6379
+  engine_version       = var.ELASTICACHE_ENGINE_VERSION
+  port                 = var.ELASTICACHE_PORT
   subnet_group_name    = aws_elasticache_subnet_group.subnet-group.name
   security_group_ids  = [aws_security_group.redis.id]
 }
