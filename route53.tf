@@ -5,3 +5,6 @@ resource "aws_route53_record" "record" {
   ttl     = "60"
   records = [aws_elasticache_cluster.redis.cache_nodes[0].address]
 }
+
+variable "ELASTICACHE_NODE_TYPE" {}
+variable "ELASTICACHE_NODE_COUNT" {}

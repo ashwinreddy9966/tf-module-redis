@@ -1,8 +1,8 @@
 resource "aws_elasticache_cluster" "redis" {
   cluster_id           = "roboshop-${var.ENV}"
   engine               = "redis"
-  node_type            =  var.REDIS_INSTANCE_CLASS
-  num_cache_nodes      = 1
+  node_type            =  var.ELASTICACHE_NODE_TYPE
+  num_cache_nodes      = var.ELASTICACHE_NODE_COUNT
   parameter_group_name = aws_elasticache_parameter_group.default.name
   engine_version       = "6.x"
   port                 = 6379
